@@ -1,0 +1,158 @@
+@import url(./reset.scss);
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+    monospace;
+}
+
+body {
+  font-size: 62.5%;
+}
+
+// Chat
+.app {
+  height: 100vh;
+  padding: 40px;
+}
+
+.chat {
+  height: 100%;
+
+  &__wrapper {
+    height: 100%;
+  }
+
+  &__aside {
+    border-right: 1px solid grey;
+  }
+
+  &__item {
+    padding: 10px;
+    border: 1px solid black;
+  }
+}
+
+.chats {
+  padding: 2rem;
+  height: 100%;
+
+  &__list {
+    padding: 0;
+    list-style: none;
+    margin-top: 30px;
+  }
+}
+
+.chats__search {
+  &-input {
+    width: 100%;
+    padding: 5px;
+    font-size: 1.4rem;
+    border: 1px solid grey;
+    border-radius: 8px;
+  }
+}
+
+// row & columns
+.row {
+  display: flex;
+  height: 100%;
+}
+
+.column {
+  flex: 1 0 50%;
+
+  &:first-of-type {
+    flex: 1 0 20%;
+  }
+}
+
+// user-info
+.user-info {
+  display: flex;
+  align-items: center;
+
+  &__avatar {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: black;
+    margin-right: 20px;
+  }
+
+  &__name {
+    font-size: 1.5rem;
+  }
+}
+
+// user-chat
+.user-chat {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+
+  &__last-message-time {
+    font-size: 1rem;
+    font-style: italic;
+  }
+
+  &__last-message {
+    font-size: 0.8rem;
+    text-align: justify;
+    padding: 10px;
+  }
+}
+
+// chat message-area
+.message-area {
+  height: 100%;
+  border: 1px solid black;
+  padding: 50px;
+	display: flex;
+	flex-direction: column;
+
+  &__messages {
+		display: flex;
+		flex-direction: column;
+		width: 100%;
+    list-style: none;
+    padding: 0;
+		flex-grow: 1;
+  }
+
+  .message {
+    outline: 1px solid red;
+    max-width: 200px;
+    padding: 10px;
+  }
+
+  .message-to {
+    align-self: flex-start;
+  }
+
+  .message-from {
+    align-self: flex-end;
+  }
+}
+
+// message form 
+.message-form {
+	display: flex;
+
+	&__input {
+		width: 100%;
+		font-size: 1.3rem;
+		padding: 10px;
+		border-radius: 4px;
+	}
+}
