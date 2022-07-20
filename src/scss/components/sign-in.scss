@@ -1,0 +1,122 @@
+$background-color: #1f41a9;
+$primary-color: rgb(255, 215, 0);
+
+.sign-in {
+  width: 100vw;
+  height: 100vh;
+  background-color: $background-color;
+  position: relative;
+
+  &::before {
+    content: "";
+    display: block;
+    width: 400px;
+    height: 400px;
+    background-color: darken($color: $background-color, $amount: 6%);
+    position: absolute;
+    bottom: -100px;
+    left: -100px;
+    border-radius: 50%;
+    border-top-right-radius: 65%;
+  }
+
+  &::after {
+    content: "";
+    display: block;
+    width: 500px;
+    height: 500px;
+    background-color: darken($color: $background-color, $amount: 4%);
+    position: absolute;
+    right: -160px;
+    top: 0;
+    border-radius: 10% 10% 10% 100%;
+  }
+
+  &__body {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    font-size: 1.2rem;
+    color: $primary-color;
+		z-index: 100;
+  }
+
+  &__title {
+    font-size: 2rem;
+    margin-top: 1em;
+		color: $primary-color;
+  }
+
+  &__desc {
+    font-size: 1rem;
+    margin: 0.5em 0;
+  }
+
+  .note {
+    margin: 0;
+    font-size: 0.7em;
+  }
+}
+
+.form {
+  &__group {
+    margin: 1em 0;
+		position: relative;
+  }
+
+	&__field-icon {
+		position: absolute;
+		top: 11px;
+		left: 10px;
+	}
+
+  &__field {
+    width: 100%;
+    padding: 5px;
+    border-radius: 3px;
+    border: 2px solid $primary-color;
+    color: $primary-color;
+    background: none;
+		padding-left: 40px;
+
+		&:focus-visible {
+			border-color: darken($color: $primary-color, $amount: 20%);
+			outline: none;
+		}
+  }
+
+  &__submit {
+    width: 100%;
+    padding: 5px;
+    background: none;
+    border: 2px solid #00ff29;
+    border-radius: 3px;
+    color: #00ff29;
+    margin: 21px 0;
+		cursor: pointer;
+		transition: all .3s;
+
+		&:hover {
+			color: yellow;
+			border-color: yellow;
+		}
+  }
+}
+
+.forgot-password {
+  display: block;
+  text-align: right;
+  font-style: italic;
+  font-weight: 400;
+  font-size: 0.9rem;
+  line-height: 23px;
+  text-decoration: none;
+  color: $primary-color;
+	transition: .3s;
+
+	&:hover {
+		color: yellow;
+	}
+}

@@ -1,0 +1,26 @@
+$background-color: #1f41a9;
+
+.chat-room {
+	height: 100vh;
+	background-color: $background-color;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+
+	&__header {
+		height: 70px;
+		background-color: #000;
+		padding: 10px;
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+	}
+
+	&__messages-list {
+		flex: 1;
+		padding: 1em;
+		display: flex;
+		flex-direction: column;
+		overflow-y: scroll;
+	}
+}

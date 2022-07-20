@@ -1,65 +1,68 @@
-import SendbirdChat from "@sendbird/chat";
-import { OpenChannelModule } from "@sendbird/chat/openChannel";
+import React, { useState, useRef } from "react";
+import firebase from "firebase/compat/app";
+import "firebase/compat/firestore";
+import "firebase/compat/auth";
+import { useAuthState } from "react-firebase-hooks/auth";
+import { useCollectionData } from "react-firebase-hooks/firestore";
+import ChatMessage from "./ChatMessage";
+import SignOut from "./SignOut";
+import ChatHeading from "./ChatHeading";
+import MessageForm from "./MessageForm";
 
-const sb = SendbirdChat.init({
-  appId: "99F4326E-FAAF-40FB-AA63-34FC1C815F9E",
-  modules: [new OpenChannelModule()],
-});
+export default function Chat() {
+  const auth = firebase.auth();
+  const firestore = firebase.firestore();
 
-console.log(sb);
+  const messageRef = firestore.collection("messages");
+  const query = messageRef.orderBy("createdAt").limit(25);
+  const [formValue, setFormValue] = useState("");
+  const anchorToAutoScroll = useRef();
 
-function Chat() {
+  const [messages] = useCollectionData(query, { idField: "id" });
+
+  const sendMessage = async (e) => {
+    e.preventDefault();
+
+    const { photoURL, uid, displayName } = auth.currentUser;
+		
+    await messageRef.add({
+      text: formValue,
+      createdAt: firebase.firestore.FieldValue.serverTimestamp(),
+      uid,
+      photoURL,
+			displayName,
+    });
+
+    setFormValue("");
+
+    anchorToAutoScroll.current.scrollIntoView({ behavior: "smooth" });
+  };
+
+  function handleMessageForm(e) {
+    setFormValue(e.target.value);
+  }
+
   return (
-    <div className="chat">
-      <div className="chat__wrapper">
-        <div className="row">
-          <div className="column">
-            <div className="chat__aside chats">
-              <div className="chats__search">
-                <input type="text" className="chats__search-input" />
-              </div>
-              <ul className="chats__list">
-                <li className="chats__item">
-                  <div className="user-chat">
-                    <div className="user-info">
-                      <div className="user-info__avatar"></div>
-                      <div className="user-info__name">Test Testovich</div>
-                    </div>
-                    <div className="user-chat__last-message-time">
-                      <span>12:00</span>
-                    </div>
-                    <div className="user-chat__last-message">
-                      <span>
-                        Lorem ipsum Lorem ipsumLorem ipsumLorem ipsumLorem
-                        ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem
-                        ipsumLorem ipsumLorem ipsum
-                      </span>
-                    </div>
-                  </div>
-                </li>
-              </ul>
-            </div>
-          </div>
-          <div className="column">
-            <div className="chat__message-area message-area">
-              <ul className="message-area__messages">
-                <li className="message message-from">
-                  <span>Hello Mike</span>
-                </li>
-                <li className="message message-to">
-                  <span>Hello Jack Sparrow</span>
-                </li>
-              </ul>
-              <div className="chat__message-form message-form">
-                <input className="message-form__input" type="text" />
-								<button className="message-form__button">Send a messages</button>
-              </div>
-            </div>
-          </div>
+    <>
+      <div className="chat-room">
+        <div className="chat-room__header">
+          <ChatHeading />
+          <SignOut auth={auth} />
         </div>
+        <div className="chat-room__messages-list">
+          {messages &&
+            messages.map((message, index) => (
+              <ChatMessage key={index} message={message} auth={auth} />
+            ))}
+          <div ref={anchorToAutoScroll}></div>
+        </div>
+
+        <MessageForm
+          sendMessage={sendMessage}
+          handleMessageForm={handleMessageForm}
+          formValue={formValue}
+        />
       </div>
-    </div>
+    </>
   );
 }
-
-export default Chat;

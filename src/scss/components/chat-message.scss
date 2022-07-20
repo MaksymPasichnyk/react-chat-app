@@ -1,0 +1,26 @@
+.chat-message {
+	max-width: 100%;
+	font-size: 20px;
+	display: flex;
+	flex-wrap: wrap;
+	background: wheat;
+	color: blue;
+	padding: 20px;
+	border-radius: 20px;
+	margin: 5px;
+	flex-direction: column;
+
+	&.sent {
+		align-self: flex-end;
+	}
+
+	&.received {
+		align-self: flex-start;
+	}
+
+	&__text {
+		font-size: 0.8rem;
+		overflow-wrap: anywhere;
+
+	}
+}

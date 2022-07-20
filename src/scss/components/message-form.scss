@@ -1,0 +1,27 @@
+.message-form {
+	&__body {
+		display: flex;
+		border: 1px solid rgb(219, 192, 143);
+	}
+
+	&__field {
+		width: 100%;
+		border: none;
+		background: none;
+		font-size: 1rem;
+		color: wheat;
+		padding: 10px;
+
+		&:focus-within {
+			outline: none;
+		}
+	}
+
+	&__submit {
+		padding: 10px;
+		font-size: 1.5rem;
+		border: none;
+		background: none;
+		color: wheat
+	}
+}
