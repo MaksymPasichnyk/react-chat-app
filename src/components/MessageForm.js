@@ -1,7 +1,8 @@
 import { FiSend } from "react-icons/fi";
+import PropTypes from 'prop-types';
 
 
-export default function MessageForm(props) {
+function MessageForm(props) {
   const { sendMessage, formValue, handleMessageForm } = props;
 
   return (
@@ -20,3 +21,11 @@ export default function MessageForm(props) {
     </form>
   );
 }
+
+MessageForm.propTypes = {
+	sendMessage: PropTypes.func.isRequired,
+	formValue: PropTypes.string.isRequired,
+	handleMessageForm: PropTypes.func.isRequired
+}
+
+export default MessageForm

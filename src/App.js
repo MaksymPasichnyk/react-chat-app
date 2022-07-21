@@ -1,10 +1,12 @@
 import SignIn from "./components/SignIn";
+import SignUp from "./components/SignUp";
 import Chat from "./components/Chat";
 import firebase from "firebase/compat/app";
 import "firebase/compat/firestore";
 import "firebase/compat/auth";
 import { useAuthState } from "react-firebase-hooks/auth";
-import { signInAnonymously } from "firebase/auth";
+import { signInAnonymously, signInWithEmailAndPassword } from "firebase/auth";
+import { Routes, Route, Link } from "react-router-dom";
 
 firebase.initializeApp({
   // config
@@ -25,15 +27,29 @@ function App(props) {
     const provider = new firebase.auth.GoogleAuthProvider();
     auth.signInWithPopup(provider);
   };
+ 
+  const signInAsAnonymus = () => {
+    signInAnonymously(auth).then((user) => console.log(user));
+  };
 
-	const signInAsAnonymus = () => {
-		signInAnonymously(auth)
-		.then((user) => console.log(user))
-	}
+	
 
   return (
     <div className="app">
-      {!user && <SignIn signInWithGoogle={signInWithGoogle} signInAsAnonymus={signInAsAnonymus} />}
+      <Routes>
+        <Route path="/signup" element={<SignUp />} />
+        <Route
+          path="/"
+          element={
+            !user && (
+              <SignIn
+                signInWithGoogle={signInWithGoogle}
+                signInAsAnonymus={signInAsAnonymus}
+              />
+            )
+          }
+        />
+      </Routes>
       {user && <Chat />}
     </div>
   );

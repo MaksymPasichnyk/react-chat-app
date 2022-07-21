@@ -24,6 +24,9 @@ body {
 @import url(./components/message-form.scss);
 @import url(./components/chat-message.scss);
 @import url(./components/user-info.scss);
+@import url(./components/form-input.scss);
+@import url(./components/sign-up.scss);
+@import url(./components/auth-container.scss);
 
 // Chat heading component
 .chat-heading {
@@ -47,49 +50,66 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-	cursor: pointer;
-	transition: opacity 0.3s;
+  cursor: pointer;
+  transition: opacity 0.3s;
 
-	&:hover {
-		opacity: 0.7;
-	}
+  &:hover {
+    opacity: 0.7;
+  }
 
-	i {
-		margin: 0 5px;
-	}
+  i {
+    margin: 0 5px;
+  }
 }
 
-// register note 
+// register note
 .register-note {
-	margin: 5px 0;
-	font-size: 0.8rem;
+  margin: 5px 0;
+  font-size: 0.8rem;
 
-	&__link {
-		text-decoration: none;
-		color: rgb(253, 235, 151);
-		font-style: italic;
-		font-size: 0.9rem;
-		margin: 0 10px;
-		transition: all .3s;
+  &__link {
+    text-decoration: none;
+    color: rgb(253, 235, 151);
+    font-style: italic;
+    font-size: 0.9rem;
+    margin: 0 10px;
+    transition: all 0.3s;
 
-		&:hover {
-			color: gold;
-			text-decoration: underline;
-		}
-	}
+    &:hover {
+      color: gold;
+      text-decoration: underline;
+    }
+  }
 }
 
-// sign-out-button 
+// sign-out-button
 .sign-out-btn {
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	height: 40px;
-	width: 130px;
-	font-size: 1.1rem;
-	background: none;
-	border: 1px solid wheat;
-	color: wheat;
-	cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 40px;
+  width: 130px;
+  font-size: 1.1rem;
+  background: none;
+  border: 1px solid wheat;
+  color: wheat;
+  cursor: pointer;
 }
 
+// form-button
+.form-button {
+  width: 100%;
+  padding: 5px;
+  background: none;
+  border: 2px solid #00ff29;
+  border-radius: 3px;
+  color: #00ff29;
+  margin: 21px 0;
+  cursor: pointer;
+  transition: all 0.3s;
+
+  &:hover {
+    color: yellow;
+    border-color: yellow;
+  }
+}

@@ -1,4 +1,7 @@
-export default function UserInfo(props) {
+import { User } from "@sendbird/chat";
+import PropTypes from "prop-types";
+
+function UserInfo(props) {
   const { avatar, name, time } = props;
 
   return (
@@ -13,3 +16,10 @@ export default function UserInfo(props) {
     </div>
   );
 }
+
+UserInfo.propTypes = {
+	avatar: PropTypes.string.isRequired,
+	name: PropTypes.string.isRequired,
+}
+
+export default UserInfo;

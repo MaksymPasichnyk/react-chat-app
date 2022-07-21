@@ -1,0 +1,27 @@
+$primary-color: rgb(255, 215, 0);
+
+.form-input {
+  margin: 1em 0;
+  position: relative;
+
+  &__field-icon {
+    position: absolute;
+    top: 11px;
+    left: 10px;
+  }
+
+  &__field {
+    width: 100%;
+    padding: 5px;
+    border-radius: 3px;
+    border: 2px solid $primary-color;
+    color: $primary-color;
+    background: none;
+    padding-left: 40px;
+
+    &:focus-visible {
+      border-color: darken($color: $primary-color, $amount: 20%);
+      outline: none;
+    }
+  }
+}

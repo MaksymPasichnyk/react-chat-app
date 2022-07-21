@@ -1,6 +1,6 @@
-import { FcGoogle } from "react-icons/fc";
+import PropTypes from 'prop-types';
 
-export default function SignInButton(props) {
+function SignInButton(props) {
   return (
     <button
       type="button"
@@ -12,3 +12,11 @@ export default function SignInButton(props) {
     </button>
   );
 }
+
+SignInButton.propTypes = {
+	icon: PropTypes.element.isRequired,
+	label: PropTypes.string.isRequired
+}
+
+
+export default SignInButton

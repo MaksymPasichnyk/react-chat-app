@@ -1,36 +1,31 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useContext } from "react";
 import firebase from "firebase/compat/app";
 import "firebase/compat/firestore";
 import "firebase/compat/auth";
-import { useAuthState } from "react-firebase-hooks/auth";
-import { useCollectionData } from "react-firebase-hooks/firestore";
 import ChatMessage from "./ChatMessage";
 import SignOut from "./SignOut";
 import ChatHeading from "./ChatHeading";
 import MessageForm from "./MessageForm";
+import { useCollectionData } from "react-firebase-hooks/firestore";
+import { AuthContext } from "../context/authContext";
 
 export default function Chat() {
-  const auth = firebase.auth();
-  const firestore = firebase.firestore();
-
-  const messageRef = firestore.collection("messages");
-  const query = messageRef.orderBy("createdAt").limit(25);
+  const { auth, messageRef, query } = useContext(AuthContext);
   const [formValue, setFormValue] = useState("");
   const anchorToAutoScroll = useRef();
-
-  const [messages] = useCollectionData(query, { idField: "id" });
+	const [messages] = useCollectionData(query, { idField: "id" });
 
   const sendMessage = async (e) => {
     e.preventDefault();
 
     const { photoURL, uid, displayName } = auth.currentUser;
-		
+
     await messageRef.add({
       text: formValue,
       createdAt: firebase.firestore.FieldValue.serverTimestamp(),
       uid,
       photoURL,
-			displayName,
+      displayName,
     });
 
     setFormValue("");
