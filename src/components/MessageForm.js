@@ -1,7 +1,5 @@
 import { FiSend } from "react-icons/fi";
 import PropTypes from 'prop-types';
-
-
 function MessageForm(props) {
   const { sendMessage, formValue, handleMessageForm } = props;
 
@@ -13,7 +11,6 @@ function MessageForm(props) {
           value={formValue}
           onChange={handleMessageForm}
         />
-
         <button className="message-form__submit btn" type="submit">
 					<FiSend />
         </button>

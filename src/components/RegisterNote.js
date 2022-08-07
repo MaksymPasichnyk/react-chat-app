@@ -1,10 +1,19 @@
-import {Link} from 'react-router-dom';
+import { Link } from "react-router-dom";
+import PropTypes from "prop-types";
 
-export default function RegisterNote(props) {
-	return (
-		<div className="register-note">
-			<span className="register-note__text">{props.text}</span>
-			<Link to={props.to} className="register-note__link">{props.linkName}</Link>
-		</div>  
-	)
+const RegisterNote = ({ text, linkName, to }) => (
+  <div className="register-note">
+    <span className="register-note__text">{text}</span>
+    <Link to={to} className="register-note__link">
+      {linkName}
+    </Link>
+  </div>
+);
+
+RegisterNote.propTypes = {
+	text: PropTypes.string,
+	linkName: PropTypes.string,
+	to: PropTypes.string,
 }
+
+export default RegisterNote;

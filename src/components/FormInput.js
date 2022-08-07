@@ -1,7 +1,8 @@
 import PropTypes from "prop-types";
+import Error from "./Error";
 
 function FormInput(props) {
-  const { icon, placeholderText, type, name, handleInputChange, value } = props;
+  const { icon, placeholderText, type, name, handleInputChange, value, error, errorClassMod } = props;
 
   return (
     <div className="form-input">
@@ -14,6 +15,7 @@ function FormInput(props) {
 				onChange={handleInputChange}
 				value={value}
       />
+			{error && <Error classMod={errorClassMod} error={error} />}
     </div>
   );
 }
@@ -22,6 +24,10 @@ FormInput.propTypes = {
   icon: PropTypes.element.isRequired,
   placeholderText: PropTypes.string.isRequired,
   type: PropTypes.string.isRequired,
+	name: PropTypes.string,
+	handleInputChange: PropTypes.func.isRequired,
+	value: PropTypes.string,
+	error: PropTypes.string,
 };
 
 export default FormInput;

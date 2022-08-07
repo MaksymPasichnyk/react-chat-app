@@ -1,17 +1,15 @@
 import PropTypes from 'prop-types';
 
-function SignInButton(props) {
-  return (
+const SignInButton = ({ signInMethod, label, icon}) => (
     <button
       type="button"
-      onClick={props.signInMethod}
+      onClick={signInMethod}
       className="btn sign-in-button"
     >
-			<i>{props.icon}</i>
-      {props.label}
+			<i>{icon}</i>
+      {label}
     </button>
   );
-}
 
 SignInButton.propTypes = {
 	icon: PropTypes.element.isRequired,

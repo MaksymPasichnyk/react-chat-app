@@ -4,9 +4,17 @@ import PropTypes from "prop-types";
 
 export default function ChatMessage(props) {
   const { message, auth } = props;
-  const { text, uid, photoURL, displayName, createdAt } = message;
 
-  const avatar = photoURL ? photoURL : defaultIcon;
+	console.log(message)
+  const {
+    text,
+    uid,
+    photoUrl,
+    displayName,
+    createdAt,
+  } = message;
+
+  const avatar = photoUrl ? photoUrl : defaultIcon;
   const name = displayName !== null ? displayName : "Guest";
   let time = null;
   const messageClass = uid === auth.currentUser.uid ? "sent" : "received";
@@ -29,6 +37,6 @@ ChatMessage.propTypes = {
     uid: PropTypes.string.isRequired,
     photoURL: PropTypes.string,
     displayName: PropTypes.string,
-    createdAt: PropTypes.object.isRequired,
+    createdAt: PropTypes.object,
   }),
 };

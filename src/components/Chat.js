@@ -1,31 +1,58 @@
-import React, { useState, useRef, useContext } from "react";
-import firebase from "firebase/compat/app";
-import "firebase/compat/firestore";
-import "firebase/compat/auth";
-import ChatMessage from "./ChatMessage";
+import React, { useState, useRef } from "react";
+import ChatMessagesList from "./ChatMessagesList";
 import SignOut from "./SignOut";
 import ChatHeading from "./ChatHeading";
 import MessageForm from "./MessageForm";
 import { useCollectionData } from "react-firebase-hooks/firestore";
-import { AuthContext } from "../context/authContext";
+import {
+  auth,
+  collection,
+  db,
+  limit,
+  orderBy,
+  query,
+  serverTimestamp,
+  addDoc,
+  where,
+} from "../firebase/firebase";
+import { nanoid } from "nanoid";
 
 export default function Chat() {
-  const { auth, messageRef, query } = useContext(AuthContext);
-  const [formValue, setFormValue] = useState("");
+	const [formValue, setFormValue] = useState("");
+  const authUid = auth.currentUser.uid;
+  const [currentUser, setCurrentUser] = useState("");
   const anchorToAutoScroll = useRef();
-	const [messages] = useCollectionData(query, { idField: "id" });
+
+	// messages data
+  const messageRef = collection(db, "messages");
+  const q = query(messageRef, orderBy("createdAt"), limit(25));
+  const [messages] = useCollectionData(q, { idField: "id" });
+
+	// users data
+  const usersRef = collection(db, "users");
+  const q2 = query(usersRef, where("uid", "==", authUid));
+  const [users] = useCollectionData(q2);
+
+	if (users && !currentUser) {
+		if (users.length) {
+			setCurrentUser(users[0])
+		} else {
+			setCurrentUser(auth.currentUser)
+		}
+	}
 
   const sendMessage = async (e) => {
     e.preventDefault();
 
-    const { photoURL, uid, displayName } = auth.currentUser;
+    const { photoUrl = null, uid, displayName } = currentUser;
 
-    await messageRef.add({
+    await addDoc(messageRef, {
       text: formValue,
-      createdAt: firebase.firestore.FieldValue.serverTimestamp(),
+      createdAt: serverTimestamp(),
       uid,
-      photoURL,
+      photoUrl,
       displayName,
+			id: nanoid(),
     });
 
     setFormValue("");
@@ -44,14 +71,12 @@ export default function Chat() {
           <ChatHeading />
           <SignOut auth={auth} />
         </div>
-        <div className="chat-room__messages-list">
-          {messages &&
-            messages.map((message, index) => (
-              <ChatMessage key={index} message={message} auth={auth} />
-            ))}
-          <div ref={anchorToAutoScroll}></div>
-        </div>
-
+				<ChatMessagesList
+					messages={messages}
+					classNameText="chat-room__messages-list"
+					auth={auth}
+					anchorToAutoScroll={anchorToAutoScroll}
+				/>
         <MessageForm
           sendMessage={sendMessage}
           handleMessageForm={handleMessageForm}

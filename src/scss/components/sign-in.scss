@@ -61,6 +61,8 @@ $primary-color: rgb(255, 215, 0);
 }
 
 .form {
+	position: relative;
+
   &__submit {
     width: 100%;
     padding: 5px;

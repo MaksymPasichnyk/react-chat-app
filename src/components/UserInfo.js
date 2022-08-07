@@ -1,10 +1,6 @@
-import { User } from "@sendbird/chat";
 import PropTypes from "prop-types";
 
-function UserInfo(props) {
-  const { avatar, name, time } = props;
-
-  return (
+const UserInfo = ({avatar, name, time}) => (
     <div className="user-info">
       <div className="user-info__avatar">
         <img className="user-info__avatar-img" src={avatar} />
@@ -15,7 +11,6 @@ function UserInfo(props) {
       </div>
     </div>
   );
-}
 
 UserInfo.propTypes = {
 	avatar: PropTypes.string.isRequired,
