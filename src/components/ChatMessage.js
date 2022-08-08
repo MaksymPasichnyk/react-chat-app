@@ -4,17 +4,15 @@ import PropTypes from "prop-types";
 
 export default function ChatMessage(props) {
   const { message, auth } = props;
-
-	console.log(message)
   const {
     text,
     uid,
-    photoUrl,
+    photoURL,
     displayName,
     createdAt,
   } = message;
 
-  const avatar = photoUrl ? photoUrl : defaultIcon;
+  const avatar = photoURL ? photoURL : defaultIcon;
   const name = displayName !== null ? displayName : "Guest";
   let time = null;
   const messageClass = uid === auth.currentUser.uid ? "sent" : "received";

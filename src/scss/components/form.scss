@@ -1,0 +1,138 @@
+$background-color: #1f41a9;
+$primary-color: rgb(255, 215, 0);
+
+//.sign-in {
+//  width: 100vw;
+//  height: 100vh;
+//  background-color: $background-color;
+//  position: relative;
+
+//  &::before {
+//    content: "";
+//    display: block;
+//    width: 400px;
+//    height: 400px;
+//    background-color: darken($color: $background-color, $amount: 6%);
+//    position: absolute;
+//    bottom: -100px;
+//    left: -100px;
+//    border-radius: 50%;
+//    border-top-right-radius: 65%;
+//  }
+
+//  &::after {
+//    content: "";
+//    display: block;
+//    width: 500px;
+//    height: 500px;
+//    background-color: darken($color: $background-color, $amount: 4%);
+//    position: absolute;
+//    right: -160px;
+//    top: 0;
+//    border-radius: 10% 10% 10% 100%;
+//  }
+
+//  &__body {
+//    position: absolute;
+//    top: 50%;
+//    left: 50%;
+//    transform: translate(-50%, -50%);
+//    text-align: center;
+//    font-size: 1.2rem;
+//    color: $primary-color;
+//		z-index: 100;
+//  }
+
+//  &__title {
+//    font-size: 2rem;
+//    margin-top: 1em;
+//		color: $primary-color;
+//  }
+
+//  &__desc {
+//    font-size: 1rem;
+//    margin: 0.5em 0;
+//  }
+
+//  .note {
+//    margin: 0;
+//    font-size: 0.7em;
+//  }
+//}
+
+.form {
+	position: relative;
+
+  &__submit {
+    width: 100%;
+    padding: 5px;
+    background: none;
+    border: 2px solid #00ff29;
+    border-radius: 3px;
+    color: #00ff29;
+    margin: 21px 0;
+		cursor: pointer;
+		transition: all .3s;
+
+		&:hover {
+			color: yellow;
+			border-color: yellow;
+		}
+  }
+}
+
+.forgot-password {
+  display: block;
+  text-align: right;
+  font-style: italic;
+  font-weight: 400;
+  font-size: 0.9rem;
+  line-height: 23px;
+  text-decoration: none;
+  color: $primary-color;
+	transition: .3s;
+
+	&:hover {
+		color: yellow;
+	}
+}
+
+.loading {
+	background: linear-gradient(-45deg, #0080ff, #004992, #0080ff);
+	background-size: 400% 400%;
+	animation: Gradient 2.5s ease infinite;
+	padding: 5px 10px;
+	border-radius: 5px;
+	border: none;
+
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+
+	color: #bbb;
+	font-size: 32px;
+
+	cursor: default;
+
+	box-shadow:
+		rgba(5, 25, 63, 0.2) 0px 2px 2px,
+		rgba(5, 25, 63, 0.2) 0px 4px 4px,
+		rgba(5, 25, 63, 0.2) 0px 8px 8px,
+		rgba(5, 25, 63, 0.2) 0px 16px 16px,
+		rgba(5, 25, 63, 0.2) 0px 32px 32px,
+		rgba(5, 25, 63, 0.2) 0 64px 64px
+}
+
+@keyframes Gradient {
+	0% {
+		background-position: 0% 50%;
+	}
+
+	50% {
+		background-position: 100% 50%;
+	}
+
+	100% {
+		background-position: 0% 50%;
+	}
+}

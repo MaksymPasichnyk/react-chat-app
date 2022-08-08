@@ -11,7 +11,7 @@ Form.propTypes = {
     PropTypes.arrayOf(PropTypes.node),
     PropTypes.node,
   ]).isRequired,
-	handleSubmitForm: PropTypes.func
+	handleSubmitForm: PropTypes.func.isRequired
 }
 
 export default Form;

@@ -6,6 +6,7 @@ import "firebase/compat/auth";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { Routes, Route } from "react-router-dom";
 import { signInWithGoogle, loginAsGuest, auth } from "./firebase/firebase";
+import ResetPassword from "./components/ResetPassword";
 
 function App(props) {
   const [user] = useAuthState(auth);
@@ -25,6 +26,10 @@ function App(props) {
             )
           }
         />
+				<Route 
+					path="/reset-password"
+					element={<ResetPassword />}
+				/>
       </Routes>
       {user && <Chat />}
     </div>

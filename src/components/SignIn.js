@@ -1,6 +1,6 @@
 // components
 import SignInButton from "./SignInButton";
-import RegisterNote from "./RegisterNote";
+import AuthNote from "./AuthNote";
 import ChatHeading from "./ChatHeading";
 import Form from "./Form";
 import PropTypes from "prop-types";
@@ -89,7 +89,7 @@ function SignIn(props) {
           label={"Google"}
           signInMethod={props.signInWithGoogle}
         />
-        <RegisterNote
+        <AuthNote
           text="Not a member yet?"
           linkName="Register"
           to="/signup"
