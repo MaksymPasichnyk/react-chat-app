@@ -1,26 +1,28 @@
-import { async } from "@firebase/util";
+import { set } from "date-fns";
 import { initializeApp } from "firebase/app";
 import {
   GoogleAuthProvider,
   getAuth,
   signInWithPopup,
-	signInAnonymously,
+  signInAnonymously,
   signInWithEmailAndPassword,
   createUserWithEmailAndPassword,
   sendPasswordResetEmail,
   signOut,
-} from 'firebase/auth';
+	updateProfile
+} from "firebase/auth";
 import {
   getFirestore,
   query,
-	orderBy,
-	limit,
+  orderBy,
+  limit,
   getDocs,
   collection,
   where,
   addDoc,
-	serverTimestamp
+  serverTimestamp,
 } from "firebase/firestore";
+import { getStorage } from "firebase/storage";
 
 const firebaseConfig = {
   apiKey: "AIzaSyDscVE9sOtTmo58zGwNvRn-oWdCcibVxvA",
@@ -35,6 +37,7 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const db = getFirestore(app);
+const storage = getStorage(app);
 
 const googleProvider = new GoogleAuthProvider();
 
@@ -51,7 +54,7 @@ const signInWithGoogle = async () => {
         displayName: user.displayName,
         authProvider: "google",
         email: user.email,
-				photoUrl: user.photoURL
+        photoUrl: user.photoURL,
       });
     }
   } catch (err) {
@@ -60,44 +63,45 @@ const signInWithGoogle = async () => {
 };
 
 const loginAsGuest = async () => {
-	try {
-		await signInAnonymously(auth)
-	} catch (err) {
-		console.error(err)
-	}
-}
+  try {
+    await signInAnonymously(auth);
+  } catch (err) {
+    console.error(err);
+  }
+};
 
 const logInWithEmailAndPassword = async (email, password, setError) => {
   try {
     await signInWithEmailAndPassword(auth, email, password);
   } catch (err) {
     console.error(err);
-    setError('Login or Password is invalid')
+    setError("Login or Password is invalid");
   }
 };
 
-const registerWithEmailAndPassword = async ({username, email, password}) => {
+const registerWithEmailAndPassword = async ({ username, email, password }) => {
   try {
     const res = await createUserWithEmailAndPassword(auth, email, password);
     const user = res.user;
-    await addDoc(collection(db, "users"), {
-      uid: user.uid,
-      displayName: username,
-      authProvider: "local",
-      email,
-    });
+
+		updateProfile(user, {
+			displayName: username,
+		})
   } catch (err) {
     console.error(err);
   }
 };
 
-const sendPasswordReset = async (email) => {
+const sendPasswordReset = async (email, setErrorText, setStatus) => {
   try {
     await sendPasswordResetEmail(auth, email);
     alert("Password reset link sent!");
+		setErrorText('');
+		setStatus(true);
   } catch (err) {
     console.error(err);
-    alert(err.message);
+    setErrorText('User with current Email is not found');
+		setStatus(false);
   }
 };
 
@@ -109,16 +113,17 @@ export {
   auth,
   db,
   signInWithGoogle,
-	registerWithEmailAndPassword,
+  registerWithEmailAndPassword,
   logInWithEmailAndPassword,
-	loginAsGuest,
+  loginAsGuest,
   sendPasswordReset,
   logout,
-	collection,
-	query,
-	orderBy,
-	limit,
-	serverTimestamp,
-	addDoc,
-	where
+  collection,
+  query,
+  orderBy,
+  limit,
+  serverTimestamp,
+  addDoc,
+  where,
+	storage,
 };

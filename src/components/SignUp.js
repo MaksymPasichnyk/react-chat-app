@@ -5,9 +5,7 @@ import AuthHeading from "./AuthHeading";
 import Form from "./Form";
 import FormButton from "./FormButton";
 import FormInput from "./FormInput";
-import RegisterNote from "./RegisterNote";
-import { useState } from "react";
-import FileUploader from "./FileUploader";
+import AuthNote from "./AuthNote";
 // utils
 import validateInfo from "../utils/validateInfo";
 
@@ -24,9 +22,6 @@ function SignUp() {
     validateInfo,
     registerWithEmailAndPassword
   );
-  const [selectedFile, setSelectedFile] = useState(null);
-
-	console.log(selectedFile)
 
   return (
     <AuthContainer>
@@ -80,12 +75,9 @@ function SignUp() {
           error={errors.confirmPassword}
           errorClassMod="error--sign-up"
         />
-				<FileUploader
-					onFileSelect={(file) => setSelectedFile(file)}
-				/>
         <FormButton type="submit" title="Create an Account" />
       </Form>
-      <RegisterNote to="/" text="Already Have An Account?" linkName="Sign in" />
+      <AuthNote to="/" text="Already Have An Account?" linkName="Sign in" />
     </AuthContainer>
   );
 }

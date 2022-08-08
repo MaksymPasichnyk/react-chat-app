@@ -19,8 +19,7 @@ import { nanoid } from "nanoid";
 
 export default function Chat() {
 	const [formValue, setFormValue] = useState("");
-  const authUid = auth.currentUser.uid;
-  const [currentUser, setCurrentUser] = useState("");
+  const [currentUser, setCurrentUser] = useState(auth.currentUser);
   const anchorToAutoScroll = useRef();
 
 	// messages data
@@ -28,29 +27,18 @@ export default function Chat() {
   const q = query(messageRef, orderBy("createdAt"), limit(25));
   const [messages] = useCollectionData(q, { idField: "id" });
 
-	// users data
-  const usersRef = collection(db, "users");
-  const q2 = query(usersRef, where("uid", "==", authUid));
-  const [users] = useCollectionData(q2);
-
-	if (users && !currentUser) {
-		if (users.length) {
-			setCurrentUser(users[0])
-		} else {
-			setCurrentUser(auth.currentUser)
-		}
-	}
+	console.log(currentUser)
 
   const sendMessage = async (e) => {
     e.preventDefault();
 
-    const { photoUrl = null, uid, displayName } = currentUser;
+    const { photoURL = null, uid, displayName } = currentUser;
 
     await addDoc(messageRef, {
       text: formValue,
       createdAt: serverTimestamp(),
       uid,
-      photoUrl,
+      photoURL,
       displayName,
 			id: nanoid(),
     });

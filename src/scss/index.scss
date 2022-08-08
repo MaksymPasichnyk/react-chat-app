@@ -19,13 +19,15 @@ body {
 
 // imports
 @import url(./reset.scss);
-@import url(./components/sign-in.scss);
+@import url(./components/form.scss);
 @import url(./components/chat-room.scss);
 @import url(./components/message-form.scss);
 @import url(./components/chat-message.scss);
 @import url(./components/user-info.scss);
 @import url(./components/form-input.scss);
+@import url(./components/form-button.scss);
 @import url(./components/auth-container.scss);
+@import url(./components/auth-heading.scss);
 
 // Chat heading component
 .chat-heading {
@@ -93,24 +95,6 @@ body {
   border: 1px solid wheat;
   color: wheat;
   cursor: pointer;
-}
-
-// form-button
-.form-button {
-  width: 100%;
-  padding: 5px;
-  background: none;
-  border: 2px solid #00ff29;
-  border-radius: 3px;
-  color: #00ff29;
-  margin: 21px 0;
-  cursor: pointer;
-  transition: all 0.3s;
-
-  &:hover {
-    color: yellow;
-    border-color: yellow;
-  }
 }
 
 // error
